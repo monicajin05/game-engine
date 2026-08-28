@@ -20,6 +20,6 @@ assets/         # Textures, sprites, etc.
 Requires SDL3 and CMake.
 
 ```
-cmake -B build
-cmake --build build
+cmake .. && make
+game_engine.exe
 ```
