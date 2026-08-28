@@ -1,5 +1,8 @@
 #include "Application.h"
 
+#include "entity/SpriteEntity.h"
+#include "render/Sprite.h"
+
 #include <SDL3/SDL.h>
 
 /**
@@ -16,19 +19,25 @@ constexpr int kAnimationDelay = 10;
 }  // namespace
 
 /**
- * Constructs an Application with a window, renderer, and sprite.
- * @throws std::runtime_error if the sprite texture fails to load.
+ * Constructs an Application with a window, renderer, and the scene's entities.
+ * @throws std::runtime_error if a sprite texture fails to load.
  */
 Application::Application()
     : window_("Game Engine", 1920, 1080)
     , renderer_(window_) {
-    sprite_ = std::make_unique<Sprite>(
+    int width = 0;
+    int height = 0;
+    SDL_GetRenderOutputSize(renderer_.handle(), &width, &height);
+
+    auto sprite = std::make_unique<Sprite>(
         renderer_.handle(), "assets/darkworld_enemy_skullduggery_idle.png",
         kFrameWidth, kFrameHeight, kFrameCount, kAnimationDelay, kSpriteScale);
+    entities_.push_back(std::make_unique<SpriteEntity>(
+        width / 2.0f, height / 2.0f, std::move(sprite)));
 }
 
 /**
- * Run the application loop, which processes events, updates the sprite, and renders the scene.
+ * Run the application loop, which processes events, updates entities, and renders the scene.
  */
 void Application::run() {
     while (running_) {
@@ -51,22 +60,23 @@ void Application::processEvents() {
 }
 
 /**
- * Update the sprite
+ * Update every entity in the scene.
  */
 void Application::update() {
-    sprite_->update();
+    for (auto& entity : entities_) {
+        entity->update();
+    }
 }
 
 /**
- * Render the scene
+ * Draw every entity in the scene.
  */
 void Application::render() {
     renderer_.clear(30, 60, 180, 255);
 
-    int width = 0;
-    int height = 0;
-    SDL_GetRenderOutputSize(renderer_.handle(), &width, &height);
-    sprite_->draw(renderer_.handle(), width / 2.0f, height / 2.0f);
+    for (auto& entity : entities_) {
+        entity->draw(renderer_.handle());
+    }
 
     renderer_.present();
 }
