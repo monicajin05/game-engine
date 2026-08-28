@@ -2,6 +2,14 @@
 
 #include "Renderer.h"
 #include "Window.h"
+#include "render/Sprite.h"
+
+#include <memory>
+
+/**
+ * Creates a window, renderer, and sprite, and runs a game loop.
+ * @author mjin6
+ */
 
 class Application {
 public:
@@ -16,5 +24,6 @@ private:
 
     Window window_;
     Renderer renderer_;
+    std::unique_ptr<Sprite> sprite_;
     bool running_ = true;
 };

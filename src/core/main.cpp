@@ -4,6 +4,10 @@
 
 #include <exception>
 
+/**
+ * @author mjin6
+ */
+
 int main(int argc, char* argv[]) {
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         SDL_Log("SDL_Init failed: %s", SDL_GetError());
