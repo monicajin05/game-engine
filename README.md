@@ -1,6 +1,6 @@
 # game-engine
 
-A small SDL3-based 2D game engine built for CSC481.
+2D game engine built for CSC481.
 
 ## Structure
 
