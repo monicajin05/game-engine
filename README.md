@@ -1,6 +1,6 @@
 # game-engine
 
-A small SDL3-based 2D game engine built for CSC481.
+2D game engine built for CSC481.
 
 ## Structure
 
@@ -22,6 +22,8 @@ Requires MSYS2 MinGW64 with the following packages:
 ```
 pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake mingw-w64-x86_64-make \
           mingw-w64-x86_64-sdl3 mingw-w64-x86_64-sdl3-image
+cmake .. && make
+game_engine.exe
 ```
 
 Run these from an **MSYS2 MinGW64** shell (not MSYS/UCRT64) so `gcc`/`cmake`
