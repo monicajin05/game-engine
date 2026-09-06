@@ -1,6 +1,5 @@
 #include "Application.h"
 
-#include "entity/SpriteEntity.h"
 #include "render/Sprite.h"
 
 #include <SDL3/SDL.h>
@@ -32,8 +31,11 @@ Application::Application()
     auto sprite = std::make_unique<Sprite>(
         renderer_.handle(), "assets/darkworld_enemy_skullduggery_idle.png",
         kFrameWidth, kFrameHeight, kFrameCount, kAnimationDelay, kSpriteScale);
-    entities_.push_back(std::make_unique<SpriteEntity>(
-        width / 2.0f, height / 2.0f, std::move(sprite)));
+    auto entity = std::make_unique<Entity>(
+        width / 2.0f, height / 2.0f,
+        kFrameWidth * kSpriteScale, kFrameHeight * kSpriteScale);
+    entity->setRenderAsset(std::move(sprite));
+    entities_.push_back(std::move(entity));
 }
 
 /**
