@@ -57,12 +57,13 @@ Application::Application()
     auto sprite_player = std::make_unique<Sprite>(
         renderer_.handle(), "assets/darkworld_character_morwen_idle.png",
         kFrameWidth, kFrameHeight, kFrameCount, kAnimationDelay, kSpriteScale);
-    entity_player = std::make_unique<Entity>("player",
+    auto player = std::make_unique<Entity>("player",
         width / 2.0f, height / 2.0f,
         kFrameWidth * kSpriteScale, kFrameHeight * kSpriteScale);
-    entity_player->setHasPhysics(true);
-    entity_player->setRenderAsset(std::move(sprite_player));
-    entities_.push_back(std::move(entity_player));
+    player->setHasPhysics(true);
+    player->setRenderAsset(std::move(sprite_player));
+    entity_player = player.get();
+    entities_.push_back(std::move(player));
 }
 
 /**

@@ -19,7 +19,7 @@ public:
 
     void run();
 
-    Entity* getPlayer() {return entity_player.get();};
+    Entity* getPlayer() {return entity_player;};
 
 private:
     void processEvents();
@@ -30,7 +30,7 @@ private:
     Renderer renderer_;
     std::vector<std::unique_ptr<Entity>> entities_;
     bool running_ = true;
-    std::unique_ptr<Entity> entity_player;
+    Entity* entity_player = nullptr;
 };
 
 #endif //GAMEENGINE_APPLICATION_H
