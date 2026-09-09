@@ -1,10 +1,13 @@
 #include "Entity.h"
 
+#include <string>
+using namespace std;
+
 /**
  * @author mjin6
  */
 
-Entity::Entity(float x, float y, float width, float height)
+Entity::Entity(string id, float x, float y, float width, float height)
     : x_(x), y_(y), width_(width), height_(height) {}
 
 void Entity::update() {

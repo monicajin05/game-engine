@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GAMEENGINE_SPRITE_H
+#define GAMEENGINE_SPRITE_H
 
 #include <SDL3/SDL.h>
 
@@ -34,3 +35,5 @@ private:
     int currentFrame_ = 0;
     Uint32 lastFrameTime_ = 0;
 };
+
+#endif //GAMEENGINE_SPRITE_H

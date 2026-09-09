@@ -1,8 +1,10 @@
-#pragma once
+#ifndef GAMEENGINE_ENTITY_H
+#define GAMEENGINE_ENTITY_H
 
 #include "render/Sprite.h"
-
 #include <SDL3/SDL.h>
+#include <string>
+using namespace std;
 
 #include <memory>
 #include <vector>
@@ -16,7 +18,7 @@
 */
 class Entity {
 public:
-    Entity(float x, float y, float width = 0.0f, float height = 0.0f);
+    Entity(string id, float x, float y, float width = 0.0f, float height = 0.0f);
     virtual ~Entity() = default;
 
     virtual void update();
@@ -53,6 +55,7 @@ public:
     Entity* parent() const { return parent_; }
     const std::vector<std::unique_ptr<Entity>>& children() const { return children_; }
     Entity& addChild(std::unique_ptr<Entity> child);
+    string getId() {return id;};
 
 protected:
     float x_;
@@ -66,4 +69,7 @@ protected:
     std::unique_ptr<Sprite> sprite_;
     Entity* parent_ = nullptr;
     std::vector<std::unique_ptr<Entity>> children_;
+    string id;
 };
+
+#endif //GAMEENGINE_ENTITY_H
