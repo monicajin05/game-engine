@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GAMEENGINE_APPLICATION_H
+#define GAMEENGINE_APPLICATION_H
 
 #include "Renderer.h"
 #include "Window.h"
@@ -18,6 +19,8 @@ public:
 
     void run();
 
+    Entity* getPlayer() {return entity_player;};
+
 private:
     void processEvents();
     void update();
@@ -27,4 +30,7 @@ private:
     Renderer renderer_;
     std::vector<std::unique_ptr<Entity>> entities_;
     bool running_ = true;
+    Entity* entity_player = nullptr;
 };
+
+#endif //GAMEENGINE_APPLICATION_H

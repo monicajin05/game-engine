@@ -1,6 +1,9 @@
-#pragma once
+#ifndef GAMEENGINE_WINDOW_H
+#define GAMEENGINE_WINDOW_H
 
 #include <SDL3/SDL.h>
+
+#endif //GAMEENGINE_WINDOW_H
 
 class Window {
 public:

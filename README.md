@@ -49,3 +49,5 @@ or from cmd/PowerShell/VS Code).
 
 The sprite-loading and animation logic in `src/render/Sprite.cpp`/`Sprite.h` is used from the CSC481 boilerplate provided in class:
 `M2 Class Activity/CSC481-581-M1/src/main.cpp`, lines 6-10, 34, 69-73, and 89-106. See the citation comments in `Sprite.h`/`Sprite.cpp` and `Application.cpp`.
+
+The input and physics header files are from the CSC481 boilerplate provided in class: `M3 Class Activity/CSC481-581-M3/src`. See the citation comments in `input.h` and `physics.h`.

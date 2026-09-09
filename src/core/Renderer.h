@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GAMEENGINE_RENDERER_H
+#define GAMEENGINE_RENDERER_H
 
 #include <SDL3/SDL.h>
 
@@ -20,3 +21,5 @@ public:
 private:
     SDL_Renderer* renderer_ = nullptr;
 };
+
+#endif //GAMEENGINE_RENDERER_H
