@@ -29,6 +29,10 @@ public:
     void setPlayer(Entity* player);
     Entity* getPlayer() {return entity_player;};
 
+    // Colour the scene is cleared to each frame, so a game can pick its own
+    // backdrop instead of the engine's default.
+    void setBackground(Uint8 r, Uint8 g, Uint8 b);
+
     SDL_Renderer* rendererHandle() const { return renderer_.handle(); }
 
     // Render output size in pixels. Prefer this over SDL_GetWindowSize()
@@ -46,6 +50,9 @@ private:
     std::vector<std::unique_ptr<Entity>> entities_;
     bool running_ = true;
     Entity* entity_player = nullptr;
+    Uint8 backgroundR_ = 30;
+    Uint8 backgroundG_ = 60;
+    Uint8 backgroundB_ = 180;
 };
 
 #endif //GAMEENGINE_APPLICATION_H

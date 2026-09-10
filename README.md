@@ -2,6 +2,8 @@
 
 2D game engine built for CSC481.
 
+**See DESIGN.md for documentation.**
+
 ## Structure
 
 ```

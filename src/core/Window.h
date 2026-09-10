@@ -3,8 +3,6 @@
 
 #include <SDL3/SDL.h>
 
-#endif //GAMEENGINE_WINDOW_H
-
 class Window {
 public:
     Window(const char* title, int width, int height);
@@ -18,3 +16,5 @@ public:
 private:
     SDL_Window* window_ = nullptr;
 };
+
+#endif //GAMEENGINE_WINDOW_H

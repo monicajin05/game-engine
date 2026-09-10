@@ -25,6 +25,12 @@ void Application::setPlayer(Entity* player) {
     entity_player = player;
 }
 
+void Application::setBackground(Uint8 r, Uint8 g, Uint8 b) {
+    backgroundR_ = r;
+    backgroundG_ = g;
+    backgroundB_ = b;
+}
+
 void Application::getRenderSize(int& width, int& height) const {
     SDL_GetRenderOutputSize(renderer_.handle(), &width, &height);
 }
@@ -83,7 +89,7 @@ void Application::update() {
  * Draw every entity in the scene.
  */
 void Application::render() {
-    renderer_.clear(30, 60, 180, 255);
+    renderer_.clear(backgroundR_, backgroundG_, backgroundB_, 255);
 
     for (auto& entity : entities_) {
         entity->draw(renderer_.handle());
