@@ -11,14 +11,10 @@
 namespace {
     constexpr int up = SDL_SCANCODE_W;
     constexpr int left = SDL_SCANCODE_A;
+    constexpr int down = SDL_SCANCODE_S;
     constexpr int right = SDL_SCANCODE_D;
-    constexpr int esc = SDL_SCANCODE_ESCAPE;
 
-    constexpr int kFrameCount = 6;
-    constexpr int kFrameWidth = 32;
-    constexpr int kFrameHeight = 32;
-    constexpr int kSpriteScale = 8;
-    constexpr int kAnimationDelay = 20;
+    constexpr int kSpriteScale = 2;
 }
 
 /**
@@ -32,23 +28,23 @@ bool Input::keyPressed(Entity* player) {
             return keyReleased(left, player);
         }
     } else {
-        if (keys[up]) {
-            player->setPosition(player->x(), player->y() + 32);
-            player->setVelocity(player->velocityX(), Physics().getGravity());
+        if (keys[up] && player->velocityY()==0) {
+            player->setPosition(player->x(), player->y() - 8);
+            player->setVelocity(player->velocityX(), player->velocityY() + Physics().getGravity());
+        }
+
+        if (keys[down]) {
+            player->setPosition(player->x(), player->y() + 8);
         }
 
         if (keys[left]) {
-            player->setVelocity(player->velocityX() - 4, player->velocityY());
+            player->setPosition(player->x() - 8, player->y());
             moving = true;
         }
 
         if (keys[right]) {
-            player->setVelocity(player->velocityX() + 4, player->velocityY());
+            player->setPosition(player->x() + 8, player->y());
             moving = true;
-        }
-
-        if (keys[esc]) {
-            SDL_Quit();
         }
     }
 

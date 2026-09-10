@@ -10,11 +10,11 @@ class Physics {
     Physics() {};
 
     //Use these functions to set and get the gravity variable to apply to entities
-    void setGravity(const float gravity) {gravityWeight = gravity;};
-    float getGravity() {return gravityWeight;};
+    void setGravity(const int gravity) {gravityWeight = gravity;};
+    int getGravity() {return gravityWeight;};
 
     private:
-    float gravityWeight;
+    int gravityWeight;
 };
 
 #endif //GAMEENGINE_PHYSICS_H
