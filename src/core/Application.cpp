@@ -50,6 +50,9 @@ void Application::processEvents() {
         if (event.type == SDL_EVENT_QUIT) {
             running_ = false;
         }
+        if (event.type == SDL_EVENT_KEY_DOWN && event.key.scancode == SDL_SCANCODE_ESCAPE) {
+            running_ = false;
+        }
     }
 }
 

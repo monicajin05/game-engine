@@ -9,9 +9,15 @@
 /**
  * @author bacrawfo
  */
+<<<<<<< HEAD
 bool Collision::hasCollision(Entity* a, Entity* b) {
     SDL_FRect hitboxA = a->hitbox();
     SDL_FRect hitboxB = b->hitbox();
+=======
+void Collision::hasCollision(Entity* a, Entity* b) {
+    SDL_FRect hitboxA {.x = a->x() - a->width() / 2.0f, .y = a->y() - a->height() / 2.0f, .w = a->width(), .h = a->height()};
+    SDL_FRect hitboxB {.x = b->x() - b->width() / 2.0f, .y = b->y() - b->height() / 2.0f, .w = b->width(), .h = b->height()};
+>>>>>>> 2a652e98e13e03e0bd758d09a135aa852d521023
     SDL_FRect overlap {0};
 
     if (SDL_GetRectIntersectionFloat(&hitboxA, &hitboxB, &overlap)) {
