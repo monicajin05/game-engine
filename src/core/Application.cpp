@@ -37,6 +37,7 @@ void Application::run() {
         processEvents();
         update();
         render();
+        SDL_Delay(16);
     }
 }
 
@@ -63,8 +64,14 @@ void Application::update() {
 
     for (auto& entity : entities_) {
         entity->update();
-        if (player && entity.get() != player) {
-            Collision().hasCollision(player, entity.get());
+    }
+
+    if (player) {
+        player->setGrounded(false);
+        for (auto& entity : entities_) {
+            if (entity.get() != player && entity->visible()) {
+                Collision().hasCollision(player, entity.get());
+            }
         }
     }
 }

@@ -9,14 +9,20 @@
 /**
  * @author bacrawfo
  */
-void Collision::hasCollision(Entity* a, Entity* b) {
+bool Collision::hasCollision(Entity* a, Entity* b) {
     SDL_FRect hitboxA = a->hitbox();
     SDL_FRect hitboxB = b->hitbox();
     SDL_FRect overlap {0};
 
     if (SDL_GetRectIntersectionFloat(&hitboxA, &hitboxB, &overlap)) {
-        collisionResponse(hitboxA, hitboxB, overlap, a, b);
+        if (!a->isTrigger() && !b->isTrigger()) {
+            collisionResponse(hitboxA, hitboxB, overlap, a, b);
+        }
+        a->onCollision(b);
+        b->onCollision(a);
+        return true;
     }
+    return false;
 }
 
 void Collision::collisionResponse(const SDL_FRect &hitboxA, const SDL_FRect &hitboxB, const SDL_FRect &overlap, Entity* a, Entity* b) {
@@ -28,10 +34,11 @@ void Collision::collisionResponse(const SDL_FRect &hitboxA, const SDL_FRect &hit
         }
         a->setVelocity(0, a->velocityY());
     } else {
-        if (a->velocityY() > 0) {
+        if (a->velocityY() >= 0 && hitboxA.y < hitboxB.y) {
             a->setPosition(a->x(), a->y() - overlap.h);
-            a->setVelocity(a->velocityX(), Physics().getGravity());
-        } else if (a->velocityY() < 0) {
+            a->setVelocity(a->velocityX(), 0);
+            a->setGrounded(true);
+        } else if (a->velocityY() < 0 || hitboxA.y >= hitboxB.y) {
             a->setPosition(a->x(), a->y() + overlap.h);
             a->setVelocity(a->velocityX(), 0);
         }

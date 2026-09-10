@@ -1,5 +1,7 @@
 #include "Entity.h"
 
+#include "physics/Physics.h"
+
 #include <string>
 using namespace std;
 
@@ -8,11 +10,12 @@ using namespace std;
  */
 
 Entity::Entity(string id, float x, float y, float width, float height)
-    : x_(x), y_(y), width_(width), height_(height) {}
+    : x_(x), y_(y), width_(width), height_(height), id(std::move(id)) {}
 
 void Entity::update() {
     movement();
     if (hasPhysics_) {
+        vy_ += Physics().getGravity();
         x_ += vx_;
         y_ += vy_;
     }

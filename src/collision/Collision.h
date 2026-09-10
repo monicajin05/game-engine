@@ -8,7 +8,7 @@
 class Collision {
     public:
 
-    void hasCollision(Entity* a, Entity* b);
+    bool hasCollision(Entity* a, Entity* b);
 
     void collisionResponse(const SDL_FRect &hitboxA, const SDL_FRect &hitboxB, const SDL_FRect &overlap, Entity *a, Entity *b);
 };

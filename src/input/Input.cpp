@@ -9,16 +9,9 @@
  * @author bacrawfo
  */
 namespace {
-    constexpr int up = SDL_SCANCODE_W;
-    constexpr int left = SDL_SCANCODE_A;
-    constexpr int right = SDL_SCANCODE_D;
-    constexpr int esc = SDL_SCANCODE_ESCAPE;
-
-    constexpr int kFrameCount = 6;
-    constexpr int kFrameWidth = 32;
-    constexpr int kFrameHeight = 32;
-    constexpr int kSpriteScale = 8;
-    constexpr int kAnimationDelay = 20;
+    constexpr int jump = SDL_SCANCODE_SPACE;
+    constexpr int left = SDL_SCANCODE_LEFT;
+    constexpr int right = SDL_SCANCODE_RIGHT;
 }
 
 /**
@@ -27,29 +20,20 @@ namespace {
  */
 bool Input::keyPressed(Entity* player) {
     const bool* keys = SDL_GetKeyboardState(nullptr);
-    if (moving) {
-        if (!keys[left] && !keys[right]) {
-            return keyReleased(left, player);
-        }
-    } else {
-        if (keys[up]) {
-            player->setPosition(player->x(), player->y() + 32);
-            player->setVelocity(player->velocityX(), Physics().getGravity());
-        }
+    constexpr float speed = 7.0f;
 
-        if (keys[left]) {
-            player->setVelocity(player->velocityX() - 4, player->velocityY());
-            moving = true;
-        }
+    float horizontalVelocity = 0.0f;
+    if (keys[left]) {
+        horizontalVelocity -= speed;
+    }
+    if (keys[right]) {
+        horizontalVelocity += speed;
+    }
+    player->setVelocity(horizontalVelocity, player->velocityY());
 
-        if (keys[right]) {
-            player->setVelocity(player->velocityX() + 4, player->velocityY());
-            moving = true;
-        }
-
-        if (keys[esc]) {
-            SDL_Quit();
-        }
+    if (keys[jump] && player->isGrounded()) {
+        player->setVelocity(player->velocityX(), -13.0f);
+        player->setGrounded(false);
     }
 
     return true;
@@ -60,8 +44,6 @@ bool Input::keyPressed(Entity* player) {
  * Takes key value and performs actions.
  */
 bool Input::keyReleased(int key, Entity* player) {
-    player->setVelocity(0, player->velocityY());
-    moving = false;
-
+    player->setVelocity(0.0f, player->velocityY());
     return true;
 }

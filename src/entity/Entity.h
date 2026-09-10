@@ -23,6 +23,7 @@ public:
 
     virtual void update();
     virtual void draw(SDL_Renderer* renderer) const;
+    virtual void onCollision(Entity* other) {}
 
     // Overridden by subclasses to set velocity from input/AI
     // physics integrates that velocity into position each frame.
@@ -45,6 +46,12 @@ public:
     bool hasPhysics() const { return hasPhysics_; }
     void setHasPhysics(bool hasPhysics) { hasPhysics_ = hasPhysics; }
 
+    bool isTrigger() const { return isTrigger_; }
+    void setTrigger(bool isTrigger) { isTrigger_ = isTrigger; }
+
+    bool isGrounded() const { return grounded_; }
+    void setGrounded(bool grounded) { grounded_ = grounded; }
+
     float velocityX() const { return vx_; }
     float velocityY() const { return vy_; }
     void setVelocity(float vx, float vy) { vx_ = vx; vy_ = vy; }
@@ -64,6 +71,8 @@ protected:
     float height_;
     bool visible_ = true;
     bool hasPhysics_ = false;
+    bool isTrigger_ = false;
+    bool grounded_ = false;
     float vx_ = 0.0f;
     float vy_ = 0.0f;
     std::unique_ptr<Sprite> sprite_;
